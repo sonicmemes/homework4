@@ -20,27 +20,27 @@ class Student:
     def __str__(self):
         return f"Имя: {self.name}\
         Фамилия: {self.surname}\
-        Средняя оценка за домашние задания: {mean(self.grades)}\
-        Курсы в процессе изучения: {self.courses_in_progress}\
-        Завершенные курсы: {self.finished_courses}"
+        Средняя оценка за домашние задания: {mean(self.grades.get(self.courses_in_progress))}\
+        Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\
+        Завершенные курсы: {', '.join(self.finished_courses)}"
     
     def __lt__(self, other):
-        return mean(self.grades.values()) < mean(other.grades.values())
+        return self.grades.values() < other.grades.values()
 
     def __le__(self, other):
-        return mean(self.grades.values()) <= mean(other.grades.values())
+        return self.grades.values() <= other.grades.values()
 
     def __eq__(self, other):
-        return mean(self.grades.values()) == mean(other.grades.values())
+        return self.grades.values() == other.grades.values()
 
     def __ne__(self, other):
-        return mean(self.grades.values()) != mean(other.grades.values())
+        return self.grades.values() != other.grades.values()
 
     def __gt__(self, other):
-        return mean(self.grades.values()) > mean(other.grades.values())
+        return self.grades.values() > other.grades.values()
 
     def __ge__(self, other):
-        return mean(self.grades.values()) >= mean(other.grades.values())
+        return self.grades.values() >= other.grades.values()
 
     
 class Mentor:
@@ -56,25 +56,25 @@ class Lecturer(Mentor):
     def __str__(self):
         return f"Имя: {self.name}\
         Фамилия: {self.surname}\
-        Средняя оценка за лекции: {mean(self.grades)}"
+        Средняя оценка за лекции: {self.grades}"
         
     def __lt__(self, other):
-        return mean(self.grades.values()) < mean(other.grades.values())
+        return self.grades.values() < other.grades.values()
 
     def __le__(self, other):
-        return mean(self.grades.values()) <= mean(other.grades.values())
+        return self.grades.values() <= other.grades.values()
 
     def __eq__(self, other):
-        return mean(self.grades.values()) == mean(other.grades.values())
+        return self.grades.values() == other.grades.values()
 
     def __ne__(self, other):
-        return mean(self.grades.values()) != mean(other.grades.values())
+        return self.grades.values() != other.grades.values()
 
     def __gt__(self, other):
-        return mean(self.grades.values()) > mean(other.grades.values())
+        return self.grades.values() > other.grades.values()
 
     def __ge__(self, other):
-        return mean(self.grades.values()) >= mean(other.grades.values())
+        return self.grades.values() >= other.grades.values()
  
 class Reviewer(Mentor):
     def __str__(self):
@@ -91,15 +91,18 @@ class Reviewer(Mentor):
 
 
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+some_student = Student('Ruoy', 'Eman', 'your_gender')
+some_student.courses_in_progress += ['Python']
+some_student.courses_in_progress += ['Git']
+some_student.finished_courses += ['Введение в программирование']
  
 cool_reviewer = Reviewer('Some', 'Buddy')
 cool_lecturer = Lecturer('Some', 'Buddy')
 cool_lecturer.courses_attached += ['Python']
+
+cool_reviewer.courses_attached += ['Python']
+cool_reviewer.rate_hw(some_student, 'Python', 10)
+cool_reviewer.rate_hw(some_student, 'Python', 10)
+cool_reviewer.rate_hw(some_student, 'Python', 10)
  
-cool_reviewer.rate_hw(best_student, 'Python', 10)
-cool_reviewer.rate_hw(best_student, 'Python', 10)
-cool_reviewer.rate_hw(best_student, 'Python', 10)
- 
-print(best_student)
+print(some_student)
