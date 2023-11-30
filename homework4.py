@@ -32,6 +32,27 @@ class Student:
         f"Курсы в процессе изучения: {', '.join(self.courses_in_progress)} \n"
         f"Завершенные курсы: {', '.join(self.finished_courses)} \n")
     
+    def __eq__(self, other):
+        avg_rate1 = mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])
+        avg_rate2 = mean([item for sublist in list(itertools.chain(other.grades.values())) for item in sublist])
+        return(avg_rate1 == avg_rate2)
+    def __gt__(self, other):
+        avg_rate1 = mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])
+        avg_rate2 = mean([item for sublist in list(itertools.chain(other.grades.values())) for item in sublist])
+        return(avg_rate1 > avg_rate2)
+    def __lt__(self, other):
+        avg_rate1 = mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])
+        avg_rate2 = mean([item for sublist in list(itertools.chain(other.grades.values())) for item in sublist])
+        return(avg_rate1 < avg_rate2)
+    
+    def compare(self, other):
+        if self == other:
+            return('Оценки равны')
+        if self > other:
+            return(f'У {self.name + " " + self.surname} оценка больше чем у {other.name + " " + other.surname}')
+        if self < other:
+            return(f'У {self.name + " " + self.surname} оценка меньше чем у {other.name + " " + other.surname}')
+
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -48,6 +69,27 @@ class Lecturer(Mentor):
         return (f"Имя: {self.name} \n"
         f"Фамилия: {self.surname} \n"
         f"Средняя оценка за лекции: {mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])} \n")
+    def __eq__(self, other):
+        avg_rate1 = mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])
+        avg_rate2 = mean([item for sublist in list(itertools.chain(other.grades.values())) for item in sublist])
+        return(avg_rate1 == avg_rate2)
+    def __gt__(self, other):
+        avg_rate1 = mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])
+        avg_rate2 = mean([item for sublist in list(itertools.chain(other.grades.values())) for item in sublist])
+        return(avg_rate1 > avg_rate2)
+    def __lt__(self, other):
+        avg_rate1 = mean([item for sublist in list(itertools.chain(self.grades.values())) for item in sublist])
+        avg_rate2 = mean([item for sublist in list(itertools.chain(other.grades.values())) for item in sublist])
+        return(avg_rate1 < avg_rate2)
+    
+    def compare(self, other):
+        
+        if self == other:
+            return('Оценки равны')
+        if self > other:
+            return(f'У {self.name + " " + self.surname} оценка больше чем у {other.name + " " + other.surname}')
+        if self < other:
+            return(f'У {self.name + " " + self.surname} оценка меньше чем у {other.name + " " + other.surname}')
         
 class Reviewer(Mentor):
     def __str__(self):
@@ -68,58 +110,6 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
-        
-# def compare_opposite(lecturer, student):
-#     avg_rate_lc = mean([item for sublist in list(itertools.chain(lecturer.grades.values())) for item in sublist])
-#     avg_rate_stu = mean([item for sublist in list(itertools.chain(student.grades.values())) for item in sublist])
-
-#     if avg_rate_lc == avg_rate_stu:
-#         return('Оценки равны')
-#     # if avg_rate_lc != avg_rate_stu:
-#     #     return('Оценки не равны')
-#     if avg_rate_lc > avg_rate_stu:
-#         return('У лектора оценка больше')
-#     if avg_rate_lc < avg_rate_stu:
-#         return('У лектора оценка меньше')
-#     # if avg_rate_lc >= avg_rate_stu:
-#     #     return('У лектора оценка больше или равна')
-#     # if avg_rate_lc <= avg_rate_stu:
-#     #     return('У лектора оценка меньше или равна')
-    
-
-def compare_students(student, student2):
-    avg_rate_stu1 = mean([item for sublist in list(itertools.chain(student.grades.values())) for item in sublist])
-    avg_rate_stu2 = mean([item for sublist in list(itertools.chain(student2.grades.values())) for item in sublist])
-
-    if avg_rate_stu1 == avg_rate_stu2:
-        return('Оценки равны')
-    # if avg_rate_stu1 != avg_rate_stu2:
-    #     return('Оценки не равны')
-    if avg_rate_stu1 > avg_rate_stu2:
-        return(f'У {student.name + " " + student.surname} оценка больше чем у {student2.name + " " + student2.surname}')
-    if avg_rate_stu1 < avg_rate_stu2:
-        return(f'У {student.name + " " + student.surname} оценка меньше чем у {student2.name + " " + student2.surname}')
-    # if avg_rate_stu1 >= avg_rate_stu2:
-    #     return(f'У {student.name + " " + student.surname} оценка больше или равна оценке {student2.name + " " + student2.surname}')
-    # if avg_rate_stu1 <= avg_rate_stu2:
-    #     return(f'У {student.name + " " + student.surname} оценка меньше или равна оценке {student2.name + " " + student2.surname}')
-
-def compare_lc(lecturer, lecturer2):
-    avg_rate_lc1 = mean([item for sublist in list(itertools.chain(lecturer.grades.values())) for item in sublist])
-    avg_rate_lc2 = mean([item for sublist in list(itertools.chain(lecturer2.grades.values())) for item in sublist])
-
-    if avg_rate_lc1 == avg_rate_lc2:
-        return('Оценки равны')
-    # if avg_rate_lc1 != avg_rate_lc2:
-    #     return('Оценки не равны')
-    if avg_rate_lc1 > avg_rate_lc2:
-        return(f'У {lecturer.name + " " + lecturer.surname} оценка больше чем у {lecturer2.name + " " + lecturer2.surname}')
-    if avg_rate_lc1 < avg_rate_lc2:
-        return(f'У {lecturer.name + " " + lecturer.surname} оценка меньше чем у {lecturer2.name + " " + lecturer2.surname}')
-    # if avg_rate_lc1 >= avg_rate_lc2:
-    #     return(f'У {lecturer.name + " " + lecturer.surname} оценка больше или равна оценке {lecturer2.name + " " + lecturer2.surname}')
-    # if avg_rate_lc1 <= avg_rate_lc2:
-    #     return(f'У {lecturer.name + " " + lecturer.surname} оценка меньше или равна оценке {lecturer2.name + " " + lecturer2.surname}')
 
 def to_dict(self):
         return {
@@ -206,8 +196,10 @@ print('Студенты:')
 print(some_student)
 print(some_student2)
 print('02.')
-print(compare_students(some_student, some_student2))
-print(compare_lc(cool_lecturer, cool_lecturer2))
+print(some_student.compare(some_student2))
+print(some_student2.compare(some_student))
+print(cool_lecturer.compare(cool_lecturer2))
+print(cool_lecturer2.compare(cool_lecturer))
 print('Задание № 4. Полевые испытания:')
 print(' ')
 
